@@ -1,0 +1,93 @@
+-- LocalScript para Roblox: Tela de link + carregamento + auto moreira
+
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.Name = "DeltaLocalGui"
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- Frame principal
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 350, 0, 180)
+mainFrame.Position = UDim2.new(0.5, -175, 0.5, -90)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Parent = gui
+
+-- Label
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 0, 40)
+label.Position = UDim2.new(0,0,0,0)
+label.BackgroundTransparency = 1
+label.Text = "Coloque o link do seu servidor aqui:"
+label.Font = Enum.Font.GothamBold
+label.TextColor3 = Color3.fromRGB(255,255,255)
+label.TextSize = 18
+label.Parent = mainFrame
+
+-- Caixa de texto
+local box = Instance.new("TextBox")
+box.Size = UDim2.new(1, -40, 0, 40)
+box.Position = UDim2.new(0,20,0,50)
+box.BackgroundColor3 = Color3.fromRGB(50,50,50)
+box.Text = ""
+box.Font = Enum.Font.Gotham
+box.TextColor3 = Color3.fromRGB(255,255,255)
+box.TextSize = 16
+box.PlaceholderText = "https://seuservidor.com"
+box.Parent = mainFrame
+
+-- Botão iniciar
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 120, 0, 40)
+button.Position = UDim2.new(0.5, -60, 0, 110)
+button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+button.Text = "Iniciar"
+button.Font = Enum.Font.GothamBold
+button.TextColor3 = Color3.fromRGB(255,255,255)
+button.TextSize = 18
+button.Parent = mainFrame
+
+-- Carregamento
+local loadingFrame = Instance.new("Frame")
+loadingFrame.Size = UDim2.new(1, 0, 1, 0)
+loadingFrame.Position = UDim2.new(0,0,0,0)
+loadingFrame.BackgroundColor3 = Color3.fromRGB(20,20,20)
+loadingFrame.Visible = false
+loadingFrame.Parent = gui
+
+local loadingText = Instance.new("TextLabel")
+loadingText.Size = UDim2.new(1,0,0,80)
+loadingText.Position = UDim2.new(0,0,0,80)
+loadingText.BackgroundTransparency = 1
+loadingText.Font = Enum.Font.GothamBlack
+loadingText.Text = "auto moreira"
+loadingText.TextColor3 = Color3.fromRGB(0, 255, 127)
+loadingText.TextSize = 48
+loadingText.Parent = loadingFrame
+
+local spinner = Instance.new("TextLabel")
+spinner.Size = UDim2.new(1,0,0,30)
+spinner.Position = UDim2.new(0,0,0.6,0)
+spinner.BackgroundTransparency = 1
+spinner.Font = Enum.Font.Gotham
+spinner.Text = "Carregando..."
+spinner.TextColor3 = Color3.fromRGB(255,255,255)
+spinner.TextSize = 24
+spinner.Parent = loadingFrame
+
+-- Função de clique
+button.MouseButton1Click:Connect(function()
+    if box.Text ~= "" then
+        mainFrame.Visible = false
+        loadingFrame.Visible = true
+        -- Simulação de carregamento (3 segundos)
+        wait(3)
+        gui:Destroy()
+    else
+        box.PlaceholderText = "Insira o link!"
+        box.BackgroundColor3 = Color3.fromRGB(255,80,80)
+        wait(0.5)
+        box.BackgroundColor3 = Color3.fromRGB(50,50,50)
+        box.PlaceholderText = "https://seuservidor.com"
+    end
+end)
